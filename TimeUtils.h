@@ -104,14 +104,36 @@ namespace utils
 
 		Time operator-(const Time& t2) const {
 
-			const Time& tm1 = *this;
+			const Time& t1 = *this;
 
-			const auto& mcs1 = tm1.GetMCS();
+			const auto& mcs1 = t1.GetMCS();
 			const auto& mcs2 = t2.GetMCS();
 			const auto dt = mcs1 - mcs2;
 
 			const Time dtTime(dt);
 			return dtTime;
+		}
+
+		bool operator==(const Time& t2) const {
+
+			const Time& t1 = *this;
+
+			const auto& mcs1 = t1.GetMCS();
+			const auto& mcs2 = t2.GetMCS();
+
+			const bool eq = mcs1 == mcs2;
+			return eq;
+		}
+
+		bool operator< (const Time& t2) const {
+
+			const Time& t1 = *this;
+
+			const auto& mcs1 = t1.GetMCS();
+			const auto& mcs2 = t2.GetMCS();
+
+			const bool less = mcs1 < mcs2;
+			return less;
 		}
 
 		static Time getDuration(const Time& first, const Time& second) {
@@ -148,24 +170,6 @@ namespace utils
 	private:
 		time_mcs _mcs {0};
 	};
-
-	inline bool operator< (const Time& t1, const Time& t2) {
-
-		const auto& mcs1 = t1.GetMCS();
-		const auto& mcs2 = t2.GetMCS();
-
-		const bool less = mcs1 < mcs2;
-		return less;
-	}
-
-	inline bool operator==(const Time& t1, const Time& t2) {
-
-		const auto& mcs1 = t1.GetMCS();
-		const auto& mcs2 = t2.GetMCS();
-
-		const bool eq = mcs1 == mcs2;
-		return eq;
-	}
 
 }
 
